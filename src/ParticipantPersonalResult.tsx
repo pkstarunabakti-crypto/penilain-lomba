@@ -80,7 +80,7 @@ export default function ParticipantPersonalResult() {
 
   return (
     <div className="h-screen flex flex-col bg-slate-50 overflow-hidden">
-      <div className="flex-1 overflow-y-auto p-4 md:p-8">
+      <div className="flex-1 overflow-y-auto p-4 md:p-8 pb-28">
         <div className="max-w-4xl mx-auto pb-16">
         <header className="text-center mb-12">
           <div className="inline-block p-3 bg-indigo-600 rounded-2xl shadow-xl shadow-indigo-200 mb-4">

@@ -7,6 +7,7 @@ import JuriInputPage from './JuriInputPage';
 import JuriFormasiPage from './JuriFormasiPage';
 import Login from './Login';
 import { WifiOff } from 'lucide-react';
+import MobileAppShell from './components/MobileAppShell';
 
 const AdminRoute = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(
@@ -79,26 +80,28 @@ export default function App() {
         </div>
       )}
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={
-            <AdminRoute>
-              <AdminPanel />
-            </AdminRoute>
-          } />
-          <Route path="/results" element={<PublicResults />} />
-          <Route path="/cek-nilai" element={<ParticipantPersonalResult />} />
-          <Route path="/juri" element={
-            <JuriRoute>
-              <JuriInputPage />
-            </JuriRoute>
-          } />
-          <Route path="/juri-formasi" element={
-            <JuriRoute>
-              <JuriFormasiPage />
-            </JuriRoute>
-          } />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <MobileAppShell>
+          <Routes>
+            <Route path="/" element={
+              <AdminRoute>
+                <AdminPanel />
+              </AdminRoute>
+            } />
+            <Route path="/results" element={<PublicResults />} />
+            <Route path="/cek-nilai" element={<ParticipantPersonalResult />} />
+            <Route path="/juri" element={
+              <JuriRoute>
+                <JuriInputPage />
+              </JuriRoute>
+            } />
+            <Route path="/juri-formasi" element={
+              <JuriRoute>
+                <JuriFormasiPage />
+              </JuriRoute>
+            } />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </MobileAppShell>
       </BrowserRouter>
     </>
   );

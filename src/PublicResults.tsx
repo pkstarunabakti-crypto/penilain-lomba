@@ -125,7 +125,7 @@ export default function PublicResults() {
         </div>
       </header>
 
-      <main className="flex-1 overflow-y-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+      <main className="flex-1 overflow-y-auto px-3 py-4 space-y-6 pb-28">
         <div className="max-w-7xl mx-auto space-y-8">
         {/* Banner Link to Single Participant Search */}
         <div className="bg-white rounded-3xl border-2 border-indigo-100 p-6 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 animate-in fade-in slide-in-from-top-2 duration-500">

@@ -245,19 +245,33 @@ export default function AdminPanel() {
   const showForm = isCreating || selectedRecordId;
 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-slate-50 font-sans overflow-y-auto md:overflow-hidden">
-      {/* Sidebar */}
+    <div className="flex flex-col md:flex-row h-screen bg-slate-50 font-sans overflow-hidden">
+      {/* Sidebar for Desktop / Header for Mobile */}
       <aside className="w-full md:w-64 bg-slate-900 text-white flex-shrink-0 shadow-xl z-20 flex flex-col md:h-full md:overflow-y-auto">
-        <div className="p-6 flex items-center gap-3 border-b border-slate-800">
+        {/* Desktop Sidebar Header - hidden on mobile */}
+        <div className="hidden md:flex p-6 items-center gap-3 border-b border-slate-800">
           <div className="bg-indigo-500 p-2 rounded-lg">
             <FileSignature className="h-6 w-6 text-white" />
           </div>
           <h1 className="text-xl font-bold tracking-tight leading-tight">Penilaian<br/>LKBB</h1>
         </div>
-        <nav className="p-4 space-y-2 flex-1">
+
+        {/* Mobile Header - only shown on mobile screen */}
+        <div className="flex md:hidden p-4 items-center justify-between border-b border-slate-800 bg-slate-900 flex-shrink-0">
+          <div className="flex items-center gap-2">
+            <div className="bg-indigo-505 p-1.5 rounded-lg bg-indigo-600">
+              <FileSignature className="h-4.5 w-4.5 text-white" />
+            </div>
+            <h1 className="text-sm font-black tracking-wider uppercase text-white">REKAP LKBB</h1>
+          </div>
+          <span className="text-[10px] font-black bg-indigo-950 border border-indigo-800/60 text-indigo-400 px-2.5 py-1 rounded-full uppercase tracking-widest">Panitia</span>
+        </div>
+
+        {/* Desktop Navigation Link Menu - hidden on mobile for super clean interface */}
+        <nav className="hidden md:flex p-4 flex-col gap-2 flex-1">
           <button
             onClick={() => { setActiveTab('dashboard'); setIsCreating(false); setSelectedRecordId(null); }}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors cursor-pointer ${
               activeTab === 'dashboard' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800'
             }`}
           >
@@ -266,7 +280,7 @@ export default function AdminPanel() {
           </button>
           <button
             onClick={() => { setActiveTab('records'); setIsCreating(false); setSelectedRecordId(null); }}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors cursor-pointer ${
               activeTab === 'records' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800'
             }`}
           >
@@ -275,7 +289,7 @@ export default function AdminPanel() {
           </button>
           <button
             onClick={() => { setActiveTab('qrcode'); setIsCreating(false); setSelectedRecordId(null); }}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors cursor-pointer ${
               activeTab === 'qrcode' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800'
             }`}
           >
@@ -284,7 +298,7 @@ export default function AdminPanel() {
           </button>
           <button
             onClick={() => { setActiveTab('rekap'); setIsCreating(false); setSelectedRecordId(null); }}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors cursor-pointer ${
               activeTab === 'rekap' ? 'bg-indigo-600 text-white' : 'text-slate-400 hover:text-white hover:bg-slate-800'
             }`}
           >
@@ -292,8 +306,36 @@ export default function AdminPanel() {
             <span className="font-medium">Rekap Panitia</span>
           </button>
         </nav>
-        
-        <div className="p-4 border-t border-slate-800 space-y-2">
+
+        {/* Mobile Horizontal Subtabs Capsule bar - visible only under md: */}
+        <div className="flex md:hidden bg-slate-950 p-2 overflow-x-auto gap-1 border-b border-slate-800/60 scrollbar-none no-scrollbar flex-shrink-0 justify-around w-full">
+          {[
+            { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+            { id: 'records', label: 'Daftar', icon: ScrollText },
+            { id: 'qrcode', label: 'Barcode', icon: QrCode },
+            { id: 'rekap', label: 'Rekap', icon: FileText }
+          ].map(sub => {
+            const SubIcon = sub.icon;
+            const isSubActive = activeTab === sub.id;
+            return (
+              <button
+                key={sub.id}
+                onClick={() => { setActiveTab(sub.id as any); setIsCreating(false); setSelectedRecordId(null); }}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-black whitespace-nowrap transition-all duration-200 cursor-pointer ${
+                  isSubActive 
+                    ? 'bg-indigo-600 text-white shadow-md' 
+                    : 'text-slate-400 bg-slate-900 border border-slate-800'
+                }`}
+              >
+                <SubIcon className="h-3 w-3" />
+                <span>{sub.label}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Desktop administrative actions block - hidden on mobile */}
+        <div className="hidden md:block p-4 border-t border-slate-800 space-y-2">
           <Link
             to="/results"
             target="_blank"
@@ -396,7 +438,7 @@ export default function AdminPanel() {
             </button>
              <button
               onClick={handleResetAllData}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-red-400 hover:text-white hover:bg-red-600/20"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-red-400 hover:text-white hover:bg-red-600/20 shadow-none cursor-pointer"
             >
               <Trash2 className="h-5 w-5" />
               <span className="font-medium">Reset All History</span>
@@ -408,7 +450,7 @@ export default function AdminPanel() {
               sessionStorage.removeItem('adminAuth');
               window.location.reload();
             }}
-            className="w-full flex items-center justify-center gap-2 mt-4 px-4 py-2 text-[10px] font-black text-red-400 hover:text-white hover:bg-red-600/20 border border-red-500/20 rounded-lg transition-all uppercase tracking-widest"
+            className="w-full flex items-center justify-center gap-2 mt-4 px-4 py-2 text-[10px] font-black text-red-400 hover:text-white hover:bg-red-600/20 border border-red-500/20 rounded-lg transition-all uppercase tracking-widest cursor-pointer"
           >
             Keluar Admin
           </button>
