@@ -1,0 +1,25 @@
+{
+  "entities": {
+    "Evaluation": {
+      "title": "LKBB Evaluation",
+      "description": "Represents a single judge's evaluation for a participant",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique record ID" },
+        "juriName": { "type": "string", "description": "Name of the judge" },
+        "participantNumber": { "type": "string", "description": "Participant number" },
+        "schoolName": { "type": "string", "description": "School name" },
+        "scores": { "type": "object", "description": "Map of item ID to score" },
+        "date": { "type": "string", "format": "date-time", "description": "Date of evaluation" },
+        "totalScore": { "type": "number", "description": "Total score calculated" }
+      },
+      "required": ["id", "juriName", "participantNumber", "scores", "date", "totalScore"]
+    }
+  },
+  "firestore": {
+    "/evaluations/{evaluationId}": {
+      "schema": "Evaluation",
+      "description": "Collection of all evaluations"
+    }
+  }
+}

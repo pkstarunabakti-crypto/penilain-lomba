@@ -1,0 +1,8 @@
+{
+  "name": "Sistem Penilaian",
+  "description": "Aplikasi untuk mengelola dan mencatat nilai siswa atau mahasiswa. Dilengkapi dengan dashboard statistik dan manajemen data siswa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

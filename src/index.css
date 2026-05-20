@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden; /* Prevent body scroll, act like a desktop window */
+  user-select: none; /* Prevent standard web highlighting */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-touch-callout: none; /* Prevent iOS popups */
+  background-color: #020617; /* slate-950 fallback */
+  overscroll-behavior: none; /* Prevent pull-to-refresh */
+}
+
+/* Allow selection in inputs */
+input, textarea, select {
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom Scrollbar for a desktop feel */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.5); /* slate-400 with opacity */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.8); /* slate-500 hover */
+}
